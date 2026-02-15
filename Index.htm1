@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine Day Capiii!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ff69b4, #ffb6c1);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        #opening {
+            font-size: 2em;
+        }
+        #main {
+            display: none;
+            margin-top: 50px;
+        }
+        .step {
+            display: none;
+        }
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .photo-gallery img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 30px;
+            font-size: 1.2em;
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        iframe {
+            margin-top: 20px;
+            border: none;
+        }
+        #countdown {
+            margin-top: 20px;
+            font-size: 1.2em;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        button {
+            margin: 20px;
+            padding: 10px 20px;
+            background: pink;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .photo-gallery img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="opening">
+        <h1>Eh, capiii? Tunggu dulu... 😏</h1>
+        <p>Cari emoji ❤️ di antara kotak-kotak ini untuk masuk ke surprise!</p>
+        <div id="emoji-game">
+            <div class="emoji-box">😊</div>
+            <div class="emoji-box">🌟</div>
+            <div class="emoji-box">🎉</div>
+            <div class="emoji-box">💖</div>
+            <div class="emoji-box">😘</div>
+            <div class="emoji-box">🥰</div>
+            <div class="emoji-box">❤️</div>
+            <div class="emoji-box">😍</div>
+            <div class="emoji-box">🤗</div>
+            <div class="emoji-box">✨</div>
+            <div class="emoji-box">💕</div>
+            <div class="emoji-box">🌈</div>
+            <div class="emoji-box">🍕</div>
+            <div class="emoji-box">🎂</div>
+            <div class="emoji-box">🎈</div>
+            <div class="emoji-box">😊</div>
+        </div>
+        <p id="game-result">Klik emoji ❤️ untuk lanjut!</p>
+        <button onclick="showMain()">Lanjut Manual</button>
+    </div>
+    
+    <div id="main">
+        <!-- Step 1: Lagu -->
+        <div id="step1" class="step">
+            <h1>Step 1: Buka Lagu Ini Ya! 🎶</h1>
+            <p>Dengarkan lagu spesial ini dulu, capiii. 💕</p>
+            <iframe src="https://open.spotify.com/embed/track/7BqBn9nzAq8spo5e7cZ0dJ" width="300" height="500" frameborder="0" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <button onclick="nextStep(2)">Next</button>
+        </div>
+        
+        <!-- Step 2: Galeri Foto Kecil -->
+        <div id="step2" class="step">
+            <h1>Step 2: Our Memories 📖</h1>
+            <p>Klik foto untuk lihat kenangan, lalu Next untuk lanjut.</p>
+            <div class="photo-gallery">
+                <img src="https://i.imgur.com/VOWFl26.jpg" alt="Kenangan 1" onclick="showMessage()">
+                <img src="https://i.imgur.com/R43QXZV.jpg" alt="Kenangan 2" onclick="showMessage()">
+                <img src="https://i.imgur.com/AJlzf5h.jpg" alt="Kenangan 3" onclick="showMessage()">
+                <img src="https://i.imgur.com/KrZlAeJ.jpg" alt="Kenangan 4" onclick="showMessage()">
+                <img src="https://i.imgur.com/E5w8G9O.jpg" alt="Kenangan 5" onclick="showMessage()">
+                <img src="https://i.imgur.com/ppZ9ehm.jpg" alt="Kenangan 6" onclick="showMessage()">
+                <img src="https://i.imgur.com/8Ls2EkI.jpg" alt="Kenangan 7" onclick="showMessage()">
+                <img src="https://i.imgur.com/SuXKKEY.jpg" alt="Kenangan 8" onclick="showMessage()">
+            </div>
+            <button onclick="nextStep(3)">Next</button>
+        </div>
+        
+        <!-- Step 3: Kata-Kata Lengkap -->
+        <div id="step3" class="step">
+            <h1>Happy Valentine Day Capiii! 💖</h1>
+            <p>Ini buat kamu, capiii!</p>
+            <div id="countdown"></div>
+            <div id="message">
+                <h2>Kata-Kata Khusus</h2>
+                <p>Makasii yaa capiiiii udah hadir diiii hidupkuuuu, dan jadiiii rumah ternyaman dan amannn buatkuu 🫶🏻<br>
+                Makasiii juga udah bikin akuu bahagia, tersenyum, and my day brighter 🥰<br>
+                With you, semuanya feels safe and beautiful<br>
+                Thank you for your patience, your kindness, and the way you always understand me<br>
+                I am so grateful to have you in my life ♥️<br>
+                Your company brings me so much happiness, and even more each day<br>
+                I love the time we spend together and I treasure the things you share with me</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMain() {
+            document.getElementById('opening').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+            document.getElementById('step1').style.display = 'block';
+        }
+
+        function nextStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+            document.getElementById('step' + step).style.display = 'block';
+            if (step === 3) {
+                alert('🎉 Happy Valentine! 🎉');
+                updateCountdown();
+            }
+        }
+
+        function showMessage() {
+            alert('Kenangan manis! 💕');
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const targetDate = new Date('2024-02-14T00:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                countdownElement.textContent = `Countdown to Valentine: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                countdownElement.textContent = 'Happy Valentine Day! 🎉';
+            }
+            setTimeout(updateCountdown, 1000);
+        }
+    </script>
+</body>
+</html>
